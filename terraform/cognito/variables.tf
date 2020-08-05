@@ -1,7 +1,6 @@
 variable "service_name" {
-  default = "cognito"
+  default = "lambda-security"
 }
-variable "service_instance_name" {}
 variable "environment_name" {}
 
 variable "region" {
@@ -13,9 +12,10 @@ variable "vpc" {
 }
 
 locals {
-  aws_service_name = "tf-${var.service_instance_name}"
+  service_instance_name = "${var.service_name}-${var.environment_name}"
+  aws_service_name = "tf-${local.service_instance_name}"
   common_tags = {
-    Name = var.service_instance_name
+    Name = local.service_instance_name
     ServiceName = var.service_name
     Environment = var.environment_name
   }
