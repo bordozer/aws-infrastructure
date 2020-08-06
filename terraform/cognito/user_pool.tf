@@ -37,8 +37,7 @@ resource "aws_cognito_user_group" "user_group" {
   role_arn     = aws_iam_role.user_group_role.arn
 }
 
-/*
-// https://stackoverflow.com/questions/55087715/how-to-create-a-aws-cognito-user-with-terraform
+/*// https://stackoverflow.com/questions/55087715/how-to-create-a-aws-cognito-user-with-terraform
 resource "null_resource" "cognito_user" {
 
   triggers = {
@@ -46,6 +45,6 @@ resource "null_resource" "cognito_user" {
   }
 
   provisioner "local-exec" {
-    command = "aws cognito-idp admin-create-user --user-pool-id ${aws_cognito_user_pool.pool.id} --username myuser"
+    command = "aws cognito-idp admin-create-user --user-pool-id ${aws_cognito_user_pool.pool.id} --username ${local.aws_service_name}-user"
   }
 }*/

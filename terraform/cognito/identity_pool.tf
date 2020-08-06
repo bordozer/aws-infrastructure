@@ -16,4 +16,10 @@ resource "aws_cognito_identity_pool_roles_attachment" "main" {
     authenticated   = aws_iam_role.authenticated_iam_role.arn
     unauthenticated = aws_iam_role.unauthenticated_iam_role.arn
   }
+
+  role_mapping {
+    identity_provider = "cognito-idp.${var.region}.amazonaws.com/${aws_cognito_user_pool.pool.id}:${aws_cognito_user_pool_client.client.id}"
+    type = "Token"
+    ambiguous_role_resolution = "Deny"
+  }
 }
