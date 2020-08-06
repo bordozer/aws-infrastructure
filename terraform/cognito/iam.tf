@@ -38,7 +38,7 @@ resource "aws_iam_role_policy" "get_credentials" {
         {
             "Effect": "Allow",
             "Action": [
-                "cognito-identity:GetCredentialsForIdentity"
+                "cognito-identity:*"
             ],
             "Resource": [
                 "*"
@@ -49,18 +49,23 @@ resource "aws_iam_role_policy" "get_credentials" {
 EOF
 }
 
-/*resource "aws_iam_role_policy" "api_gateway_and_lambda" {
-  name = "${local.aws_service_name}-role-policy"
+resource "aws_iam_role_policy" "api_gateway_and_lambda" {
+  name = "${local.aws_service_name}-api-gateway-and-lambda-role-policy"
   role = aws_iam_role.user_group_role.id
   policy = <<EOF
 {
-    "Sid": "AllowToInvokeFunction",
-    "Effect": "Allow",
-    "Action": "lambda:InvokeFunction",
-    "Resource": "*"
+    "Version": "2012-10-17",
+    "Statement": [
+        {
+            "Sid": "AllowToInvokeFunction",
+            "Effect": "Allow",
+            "Action": "lambda:InvokeFunction",
+            "Resource": "*"
+        }
+    ]
 }
 EOF
-}*/
+}
 
 # =====================================================
 #                     Identity pool
@@ -69,17 +74,24 @@ resource "aws_iam_role" "unauthenticated_iam_role" {
   name = "${local.aws_service_name}-identity-pool-unauthenticated-role"
   assume_role_policy = <<EOF
 {
-    "Version": "2012-10-17",
-    "Statement": [
-         {
-              "Action": "sts:AssumeRole",
-              "Principal": {
-                   "Federated": "cognito-identity.amazonaws.com"
-              },
-              "Effect": "Allow",
-              "Sid": ""
-         }
-    ]
+  "Version": "2012-10-17",
+  "Statement": [
+    {
+      "Effect": "Allow",
+      "Principal": {
+        "Federated": "cognito-identity.amazonaws.com"
+      },
+      "Action": "sts:AssumeRoleWithWebIdentity",
+      "Condition": {
+        "StringEquals": {
+          "cognito-identity.amazonaws.com:aud": "*"
+        },
+        "ForAnyValue:StringLike": {
+          "cognito-identity.amazonaws.com:amr": "authenticated"
+        }
+      }
+    }
+  ]
 }
 EOF
 }
@@ -106,17 +118,24 @@ resource "aws_iam_role" "authenticated_iam_role" {
   name = "${local.aws_service_name}-identity-pool-authenticated-role"
   assume_role_policy = <<EOF
 {
-    "Version": "2012-10-17",
-    "Statement": [
-         {
-              "Action": "sts:AssumeRole",
-              "Principal": {
-                   "Federated": "cognito-identity.amazonaws.com"
-              },
-              "Effect": "Allow",
-              "Sid": ""
-         }
-    ]
+  "Version": "2012-10-17",
+  "Statement": [
+    {
+      "Effect": "Allow",
+      "Principal": {
+        "Federated": "cognito-identity.amazonaws.com"
+      },
+      "Action": "sts:AssumeRoleWithWebIdentity",
+      "Condition": {
+        "StringEquals": {
+          "cognito-identity.amazonaws.com:aud": "*"
+        },
+        "ForAnyValue:StringLike": {
+          "cognito-identity.amazonaws.com:amr": "authenticated"
+        }
+      }
+    }
+  ]
 }
 EOF
 }
