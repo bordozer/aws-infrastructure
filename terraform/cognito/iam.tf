@@ -1,4 +1,4 @@
-resource "aws_iam_role" "user_group_role" {
+/*resource "aws_iam_role" "user_group_role" {
   name = "${local.aws_service_name}-user-group-role"
 
   assume_role_policy = <<EOF
@@ -57,15 +57,18 @@ resource "aws_iam_role_policy" "api_gateway_and_lambda" {
     "Version": "2012-10-17",
     "Statement": [
         {
-            "Sid": "AllowToInvokeFunction",
             "Effect": "Allow",
-            "Action": "lambda:InvokeFunction",
-            "Resource": "*"
+            "Action": [
+                "lambda:InvokeFunction"
+            ],
+            "Resource": [
+                "*"
+            ]
         }
     ]
 }
 EOF
-}
+}*/
 
 # =====================================================
 #                     Identity pool
