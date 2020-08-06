@@ -1,5 +1,5 @@
 variable "service_name" {
-  default = "jlambda-security"
+  default = "jlambda_security"
 }
 variable "environment_name" {}
 

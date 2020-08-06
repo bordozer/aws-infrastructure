@@ -1,7 +1,8 @@
 resource "aws_cognito_user_pool" "pool" {
   name                      = "${local.aws_service_name}-user-pool"
   alias_attributes          = ["email", "phone_number"]
-  auto_verified_attributes  = ["email", "phone_number"]
+  auto_verified_attributes  = ["email"]
+  mfa_configuration         = "OFF"
 
   password_policy {
     minimum_length    = 6
@@ -9,10 +10,6 @@ resource "aws_cognito_user_pool" "pool" {
     require_numbers   = true
     require_symbols   = false
     require_uppercase = true
-  }
-
-  software_token_mfa_configuration = {
-    enabled = false
   }
 
   tags = local.common_tags
@@ -39,3 +36,16 @@ resource "aws_cognito_user_group" "user_group" {
   precedence   = 42
   role_arn     = aws_iam_role.user_group_role.arn
 }
+
+/*
+// https://stackoverflow.com/questions/55087715/how-to-create-a-aws-cognito-user-with-terraform
+resource "null_resource" "cognito_user" {
+
+  triggers = {
+    user_pool_id = aws_cognito_user_pool.pool.id
+  }
+
+  provisioner "local-exec" {
+    command = "aws cognito-idp admin-create-user --user-pool-id ${aws_cognito_user_pool.pool.id} --username myuser"
+  }
+}*/
