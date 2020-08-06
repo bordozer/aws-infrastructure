@@ -1,5 +1,5 @@
 variable "service_name" {
-  default = "lambda-security"
+  default = "jlambda-security"
 }
 variable "environment_name" {}
 
