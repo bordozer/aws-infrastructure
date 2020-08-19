@@ -8,4 +8,8 @@ resource "aws_vpc_endpoint" "execute_api" {
   subnet_ids = var.subnets
 
   tags = local.common_tags
+
+  /*lifecycle {
+    prevent_destroy = true
+  }*/
 }

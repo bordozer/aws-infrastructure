@@ -1,5 +1,5 @@
 resource "aws_api_gateway_rest_api" "lambda_api_gateway" {
-  name        = "${local.aws_service_name}-private-api-gateway"
+  name        = "${local.aws_name}-private-api-gateway"
   description = "${local.service_instance_name}: lambda API gateway"
 
   endpoint_configuration {
@@ -26,4 +26,8 @@ resource "aws_api_gateway_rest_api" "lambda_api_gateway" {
 POLICY
 
   tags = local.common_tags
+
+  /*lifecycle {
+    prevent_destroy = true
+  }*/
 }
