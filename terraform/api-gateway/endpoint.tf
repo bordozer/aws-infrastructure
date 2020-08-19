@@ -10,7 +10,7 @@ resource "aws_vpc_endpoint" "execute_api" {
 
   tags = local.common_tags
 
-  /*lifecycle {
+  lifecycle {
     prevent_destroy = true
-  }*/
+  }
 }

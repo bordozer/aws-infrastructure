@@ -13,9 +13,9 @@ resource "aws_security_group" "endpoint" {
 
   tags = local.common_tags
 
-  /*lifecycle {
+  lifecycle {
     prevent_destroy = true
-  }*/
+  }
 }
 
 resource "aws_security_group_rule" "with_https" {

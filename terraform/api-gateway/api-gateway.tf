@@ -27,7 +27,7 @@ POLICY
 
   tags = local.common_tags
 
-  /*lifecycle {
+  lifecycle {
     prevent_destroy = true
-  }*/
+  }
 }
