@@ -2,11 +2,17 @@ variable "service_name" {}
 variable "environment_name" {}
 
 variable "region" {
-  default = "us-east-1"
+  default = "eu-west-3"
 }
-
 variable "vpc_id" {
   default = "vpc-74c2c81d"
+}
+variable "subnets" {
+  default = [
+    "subnet-08d6e761",
+    "subnet-f2d79f89",
+    "subnet-096bf644"
+  ]
 }
 
 locals {
