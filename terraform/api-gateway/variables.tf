@@ -19,10 +19,10 @@ locals {
   service_instance_name = "${var.service_name}:${var.environment_name}"
   aws_name = "tf-${local.service_instance_name}"
   common_tags = {
-    Name = local.service_instance_name
-    ServiceName = var.service_name
-    Environment = var.environment_name
-    CreatedBy = "Terraform"
-    Project = "aws-infrastructure"
+    Name          = local.service_instance_name
+    ServiceName   = var.service_name
+    Environment   = var.environment_name
+    CreatedBy     = "Terraform"
+    GitRepoName   = "aws-infrastructure"
   }
 }
