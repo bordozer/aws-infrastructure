@@ -5,7 +5,7 @@ variable "region" {
   default = "us-east-1"
 }
 
-variable "vpc" {
+variable "vpc_id" {
   default = "vpc-74c2c81d"
 }
 

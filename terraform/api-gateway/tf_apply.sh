@@ -3,7 +3,7 @@
 YELLOW='\e[93m'
 DEFAULT='\e[39m'
 
-SERVICE_NAME="cognito"
+SERVICE_NAME="api-gateway"
 
 # env: `test` or `prod`
 ENV=$1

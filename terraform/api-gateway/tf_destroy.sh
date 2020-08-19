@@ -4,7 +4,7 @@ YELLOW='\e[93m'
 RED='\e[31m'
 DEFAULT='\e[39m'
 
-SERVICE_NAME="jlambda"
+SERVICE_NAME="api-gateway"
 # env: `test` or `prod`
 ENV=$1
 FORCE=$2
