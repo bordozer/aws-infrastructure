@@ -22,6 +22,7 @@ locals {
     Name = local.service_instance_name
     ServiceName = var.service_name
     Environment = var.environment_name
-    CreatedBy = "aws-infrastructure:${var.service_name}"
+    CreatedBy = "Terraform"
+    Project = "aws-infrastructure"
   }
 }
