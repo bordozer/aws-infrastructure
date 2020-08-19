@@ -5,7 +5,8 @@ resource "aws_vpc_endpoint" "execute_api" {
   security_group_ids  = [
     aws_security_group.endpoint.id
   ]
-  subnet_ids = var.subnets
+  subnet_ids          = var.subnets
+  private_dns_enabled = true
 
   tags = local.common_tags
 

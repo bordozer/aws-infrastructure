@@ -16,7 +16,7 @@ variable "subnets" {
 }
 
 locals {
-  service_instance_name = "${var.service_name}-${var.environment_name}"
+  service_instance_name = "${var.service_name}:${var.environment_name}"
   aws_name = "tf-${local.service_instance_name}"
   common_tags = {
     Name = local.service_instance_name
