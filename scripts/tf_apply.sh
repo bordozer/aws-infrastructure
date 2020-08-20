@@ -3,10 +3,14 @@
 YELLOW='\e[93m'
 DEFAULT='\e[39m'
 
-SERVICE_NAME="cognito"
+SERVICE_NAME=$1
+if [ -z "$SERVICE_NAME" ]
+then
+      echo "SERVICE_NAME cannot be empty"
+      exit 1;
+fi
 
-# env: `test` or `prod`
-ENV=$1
+ENV=$2
 if [ -z "$ENV" ]
 then
       echo -e "ENV parameter is empty. Provide '${YELLOW}test${DEFAULT}' or '${YELLOW}prod${DEFAULT}'"

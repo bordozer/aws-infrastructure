@@ -4,9 +4,14 @@ YELLOW='\e[93m'
 RED='\e[31m'
 DEFAULT='\e[39m'
 
-SERVICE_NAME="jlambda"
-# env: `test` or `prod`
-ENV=$1
+SERVICE_NAME=$1
+if [ -z "$SERVICE_NAME" ]
+then
+      echo "SERVICE_NAME cannot be empty"
+      exit 1;
+fi
+
+ENV=$2
 if [ -z "$ENV" ]
 then
       echo "ENV is empty. Provide 'test' or 'prod'"

@@ -1,5 +1,5 @@
 variable "service_name" {}
-variable "environment_name" {}
+variable "environment" {}
 
 variable "git_hash" {}
 variable "git_branch" {}
@@ -20,12 +20,12 @@ variable "subnets" {
 }
 
 locals {
-  service_instance_name = "${var.service_name}:${var.environment_name}"
+  service_instance_name = "${var.service_name}:${var.environment}"
   aws_name = "tf-${local.service_instance_name}"
   common_tags = {
     Name          = local.service_instance_name
     ServiceName   = var.service_name
-    Environment   = var.environment_name
+    Environment   = var.environment
     CreatedBy     = "Terraform"
     GitRepoName   = var.git_repo_name
   }
