@@ -13,6 +13,10 @@ resource "aws_cognito_user_pool" "pool" {
   }
 
   tags = local.common_tags
+
+  lifecycle {
+    prevent_destroy = true
+  }
 }
 
 resource "aws_cognito_user_pool_client" "client" {

@@ -1,6 +1,10 @@
 variable "service_name" {}
 variable "environment_name" {}
 
+variable "git_hash" {}
+variable "git_branch" {}
+variable "git_repo_name" {}
+
 variable "region" {
   default = "eu-west-3"
 }
@@ -23,6 +27,6 @@ locals {
     ServiceName   = var.service_name
     Environment   = var.environment_name
     CreatedBy     = "Terraform"
-    GitRepoName   = "aws-infrastructure"
+    GitRepoName   = var.git_repo_name
   }
 }

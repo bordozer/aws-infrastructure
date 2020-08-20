@@ -7,6 +7,10 @@ resource "aws_cognito_identity_pool" "main" {
     provider_name           = "cognito-idp.${var.region}.amazonaws.com/${aws_cognito_user_pool.pool.id}"
     server_side_token_check = true
   }
+
+  lifecycle {
+    prevent_destroy = true
+  }
 }
 
 resource "aws_cognito_identity_pool_roles_attachment" "main" {
